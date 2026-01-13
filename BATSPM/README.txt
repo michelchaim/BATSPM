@@ -198,6 +198,27 @@ and ensure your Output Folder exists before starting.
 
 ------------------------------------------------------------
 
+### Bonus Tool: Bruker to NIfTI Converter (bruker_to_nii.py)
 
+**Description:**
+This is a standalone Python utility included in the toolbox to convert raw Bruker MRI data (2dseq) into SPM-compatible NIfTI files (.nii.gz). It is specifically engineered to handle "bad headers" where the metadata (visu_pars) conflicts with the actual binary data size—a common issue in animal scanners.
+
+**Features:**
+* **Automatic Affine Generation:** Calculates the correct orientation matrix (s-form) from the method/reco files, preventing the "swapped dimensions" issue common in raw exports.
+* **Header Correction:** Includes a fallback logic that mathematically deduces the correct slice count if the Bruker header file is corrupted or incorrect.
+* **Batch Processing:** Converts an entire directory of scans in one go.
+
+**Requirements:**
+* Python 3.x
+* Libraries: `nibabel`, `numpy` (Install via: `pip install nibabel numpy`)
+* Optional: `dcm2niix` (The script tries to use this first, then falls back to its own internal Python converter if dcm2niix fails).
+
+**How to Use:**
+1.  Place the script `bruker_to_nii.py` in your main project folder.
+2.  Create a folder named exactly `T2 scans` in the same directory.
+3.  Drag your raw Bruker subject folders (containing `pdata`, `method`, etc.) into `T2 scans`.
+4.  Run the script from your terminal:
+    python3 bruker_to_nii.py
+5.  Converted files will appear in a new folder called `nii_output`.
 
 
